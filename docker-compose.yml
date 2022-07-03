@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  articledb:
+    image: mongo
+
+  reviewdb:
+    image: mongo
+
+  articleapi:
+    image: ${DOCKER_REGISTRY-}articleapi
+    build:
+      context: .
+      dockerfile: ArticleAPI/Dockerfile
+
+  reviewapi:
+    image: ${DOCKER_REGISTRY-}reviewapi
+    build:
+      context: .
+      dockerfile: ReviewAPI/Dockerfile
+

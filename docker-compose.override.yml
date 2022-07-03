@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  articledb:
+    container_name: articledb
+    restart: always
+    ports:
+      - "27017:27017"
+
+  reviewdb:
+    container_name: reviewdb
+    restart: always
+    ports:
+      - "27018:27017"
+
+  articleapi:
+    container_name: articleapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ArticleDatabase:ConnectionString=mongodb://articledb:27017"
+    depends_on:
+      - articledb
+    ports:
+      - "8000:80"
+
+  reviewapi:
+    container_name: reviewapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ReviewDatabase:ConnectionString=mongodb://reviewdb:27017"
+    depends_on:
+      - reviewdb
+    ports:
+      - "8001:80"
+
