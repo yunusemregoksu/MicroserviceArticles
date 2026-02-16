@@ -1,3 +1,6 @@
+using ArticleAPI.Entities;
+using Microsoft.AspNetCore.OData;
+using Microsoft.OData.ModelBuilder;
 using ArticleAPI.Services;
 using ArticleAPI.Settings;
 
@@ -12,7 +15,18 @@ builder.Services.Configure<ReviewApiSettings>(
 builder.Services.AddSingleton<ArticlesService>();
 builder.Services.AddHttpClient<ReviewsServiceClient>();
 
-builder.Services.AddControllers();
+var articleODataBuilder = new ODataConventionModelBuilder();
+articleODataBuilder.EntitySet<Article>("Articles");
+
+builder.Services.AddControllers()
+    .AddOData(options => options
+        .Select()
+        .Filter()
+        .OrderBy()
+        .Expand()
+        .Count()
+        .SetMaxTop(100)
+        .AddRouteComponents("odata", articleODataBuilder.GetEdmModel()));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -28,6 +28,9 @@ namespace ArticleAPI.Services
         public async Task<Article?> GetAsync(string id) =>
             await _articlesCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+        public IQueryable<Article> AsQueryable() =>
+            _articlesCollection.AsQueryable();
+
         public async Task CreateAsync(Article newArticle) =>
             await _articlesCollection.InsertOneAsync(newArticle);
 

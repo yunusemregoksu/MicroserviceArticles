@@ -1,6 +1,7 @@
 ﻿using ArticleAPI.Entities;
 using ArticleAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace ArticleAPI.Controllers
 {
@@ -20,6 +21,12 @@ namespace ArticleAPI.Controllers
         [HttpGet]
         public async Task<List<Article>> Get() =>
             await _articlesService.GetAsync();
+
+
+        [EnableQuery]
+        [HttpGet("/odata/Articles")]
+        public IQueryable<Article> GetOData() =>
+            _articlesService.AsQueryable();
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Article>> Get(string id)

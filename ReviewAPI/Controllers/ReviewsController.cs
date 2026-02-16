@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using ReviewAPI.Entities;
 using ReviewAPI.Services;
 
@@ -20,6 +21,12 @@ namespace ReviewAPI.Controllers
         [HttpGet]
         public async Task<List<Review>> Get() =>
             await _reviewsService.GetAsync();
+
+
+        [EnableQuery]
+        [HttpGet("/odata/Reviews")]
+        public IQueryable<Review> GetOData() =>
+            _reviewsService.AsQueryable();
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Review>> Get(string id)
