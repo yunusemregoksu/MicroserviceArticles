@@ -28,6 +28,9 @@ namespace ReviewAPI.Services
         public async Task<Review?> GetAsync(string id) =>
             await _reviewsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+        public IQueryable<Review> AsQueryable() =>
+            _reviewsCollection.AsQueryable();
+
         public async Task<bool> HasReviewsForArticleAsync(string articleId) =>
             await _reviewsCollection.Find(x => x.ArticleId == articleId).AnyAsync();
 
