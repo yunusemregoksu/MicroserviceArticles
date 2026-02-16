@@ -9,9 +9,13 @@ namespace ArticleAPI.Controllers
     public class ArticlesController : ControllerBase
     {
         private readonly ArticlesService _articlesService;
+        private readonly ReviewsServiceClient _reviewsServiceClient;
 
-        public ArticlesController(ArticlesService articlesService) =>
+        public ArticlesController(ArticlesService articlesService, ReviewsServiceClient reviewsServiceClient)
+        {
             _articlesService = articlesService;
+            _reviewsServiceClient = reviewsServiceClient;
+        }
 
         [HttpGet]
         public async Task<List<Article>> Get() =>
@@ -63,6 +67,20 @@ namespace ArticleAPI.Controllers
             if (article is null)
             {
                 return NotFound();
+            }
+
+            try
+            {
+                var hasReviews = await _reviewsServiceClient.HasReviewsForArticleAsync(id);
+
+                if (hasReviews)
+                {
+                    return BadRequest($"Article with id '{id}' cannot be deleted because it has reviews.");
+                }
+            }
+            catch (HttpRequestException)
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable, "Could not validate reviews for article.");
             }
 
             await _articlesService.RemoveAsync(id);
