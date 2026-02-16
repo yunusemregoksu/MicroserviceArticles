@@ -34,6 +34,14 @@ namespace ReviewAPI.Controllers
             return review;
         }
 
+
+        [HttpGet("article/{articleId:length(24)}/exists")]
+        public async Task<ActionResult<bool>> HasReviewsForArticle(string articleId)
+        {
+            var hasReviews = await _reviewsService.HasReviewsForArticleAsync(articleId);
+            return Ok(hasReviews);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(Review newReview)
         {

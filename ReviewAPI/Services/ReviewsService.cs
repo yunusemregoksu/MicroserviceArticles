@@ -28,6 +28,9 @@ namespace ReviewAPI.Services
         public async Task<Review?> GetAsync(string id) =>
             await _reviewsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+        public async Task<bool> HasReviewsForArticleAsync(string articleId) =>
+            await _reviewsCollection.Find(x => x.ArticleId == articleId).AnyAsync();
+
         public async Task CreateAsync(Review newReview) =>
             await _reviewsCollection.InsertOneAsync(newReview);
 
