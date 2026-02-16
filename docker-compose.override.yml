@@ -28,6 +28,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ReviewDatabase:ConnectionString=mongodb://reviewdb:27017"
+      - "ArticleApi:BaseUrl=http://articleapi/"
     depends_on:
       - reviewdb
     ports:
