@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewAPI", "ReviewAPI\Revi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticleAPI", "ArticleAPI\ArticleAPI.csproj", "{31661FBC-7490-4920-BB0A-FC7A44E2E16A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceArticles.Tests", "MicroserviceArticles.Tests\MicroserviceArticles.Tests.csproj", "{46822EAD-BB0F-4B4C-8B16-1965458D7FB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{31661FBC-7490-4920-BB0A-FC7A44E2E16A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31661FBC-7490-4920-BB0A-FC7A44E2E16A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31661FBC-7490-4920-BB0A-FC7A44E2E16A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46822EAD-BB0F-4B4C-8B16-1965458D7FB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46822EAD-BB0F-4B4C-8B16-1965458D7FB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46822EAD-BB0F-4B4C-8B16-1965458D7FB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46822EAD-BB0F-4B4C-8B16-1965458D7FB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
